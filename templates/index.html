@@ -14,5 +14,10 @@
         <button type="submit">Check News</button>
     </form>
 
+    {% if prediction %}
+    <h2>Result: {{ prediction }}</h2>
+    <p>Confidence: {{ confidence }}%</p>
+    {% endif %}
+
 </body>
 </html>
