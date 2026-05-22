@@ -16,9 +16,11 @@
     </form>
 
     {% if prediction %}
+<div class="result {{ prediction.lower() }}">
     <h2>Result: {{ prediction }}</h2>
     <p>Confidence: {{ confidence }}%</p>
-    {% endif %}
+</div>
+{% endif %}
 
 </body>
 </html>

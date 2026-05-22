@@ -33,3 +33,19 @@ button {
 button:hover {
     background-color: #3498db;
 }
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.true {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.fake {
+    background-color: #e74c3c;
+    color: white;
+}
