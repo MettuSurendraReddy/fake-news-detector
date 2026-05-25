@@ -12,7 +12,11 @@
         <textarea name="article" rows="10" cols="60" 
         placeholder="Paste your news article here..."></textarea>
         <br><br>
-        <button type="submit">Check News</button>
+        <button type="submit" onclick="showSpinner()">Check News</button>
+
+<div id="spinner" style="display:none; margin-top:20px; text-align:center;">
+    <p>⏳ Analyzing article... please wait</p>
+</div>
     </form>
 
     {% if prediction %}
@@ -21,6 +25,11 @@
     <p>Confidence: {{ confidence }}%</p>
 </div>
 {% endif %}
+<script>
+    function showSpinner() {
+        document.getElementById('spinner').style.display = 'block';
+    }
+</script>
 
 </body>
 </html>
