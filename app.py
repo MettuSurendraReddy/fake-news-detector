@@ -12,6 +12,12 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict_news():
     article = request.form['article']
+    
+    # Check if user submitted empty text
+    if not article.strip():
+        return render_template('index.html',
+                             error="Please paste a news article before clicking Check News.")
+    
     result = predict(article)
     return render_template('index.html', 
                          prediction=result['prediction'],

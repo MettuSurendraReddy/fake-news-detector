@@ -76,3 +76,11 @@ button:hover {
     color: #7f8c8d;
     font-size: 15px;
 }
+.error {
+    background-color: #f39c12;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}

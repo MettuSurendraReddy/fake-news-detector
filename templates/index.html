@@ -9,6 +9,11 @@
     <p class="subtitle">Powered by RoBERTa — HuggingFace Transformers</p>
 
     <div class="card">
+        {% if error %}
+<div class="error">
+    <p>⚠️ {{ error }}</p>
+</div>
+{% endif %}
         <form action="/predict" method="POST">
             <textarea name="article" rows="10"
             placeholder="Paste your news article here..."></textarea>
