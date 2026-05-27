@@ -5,31 +5,34 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Fake News Detector</h1>
-    <p>Paste a news article below to check if it is real or fake.</p>
+    <h1>🔍 Fake News Detector</h1>
+    <p class="subtitle">Powered by RoBERTa — HuggingFace Transformers</p>
 
-    <form action="/predict" method="POST">
-        <textarea name="article" rows="10" cols="60" 
-        placeholder="Paste your news article here..."></textarea>
-        <br><br>
-        <button type="submit" onclick="showSpinner()">Check News</button>
+    <div class="card">
+        <form action="/predict" method="POST">
+            <textarea name="article" rows="10"
+            placeholder="Paste your news article here..."></textarea>
+            <br>
+            <button type="submit" onclick="showSpinner()">Check News</button>
+        </form>
 
-<div id="spinner" style="display:none; margin-top:20px; text-align:center;">
-    <p>⏳ Analyzing article... please wait</p>
-</div>
-    </form>
+        <div id="spinner" style="display:none; margin-top:20px;">
+            <p>⏳ Analyzing article... please wait</p>
+        </div>
 
-    {% if prediction %}
-<div class="result {{ prediction.lower() }}">
-    <h2>Result: {{ prediction }}</h2>
-    <p>Confidence: {{ confidence }}%</p>
-</div>
-{% endif %}
-<script>
-    function showSpinner() {
-        document.getElementById('spinner').style.display = 'block';
-    }
-</script>
+        {% if prediction %}
+        <div class="result {{ prediction.lower() }}">
+            <h2>Result: {{ prediction }}</h2>
+            <p>Confidence: {{ confidence }}%</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
