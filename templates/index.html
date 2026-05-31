@@ -25,6 +25,12 @@
             <p>⏳ Analyzing article... please wait</p>
         </div>
 
+        {% if warning %}
+        <div class="warning">
+            <p>⚠️ {{ warning }}</p>
+        </div>
+        {% endif %}
+
         {% if prediction %}
         <div class="result {{ prediction.lower() }}">
             <h2>Result: {{ prediction }}</h2>

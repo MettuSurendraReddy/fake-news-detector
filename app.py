@@ -16,17 +16,29 @@ def predict_news():
     # Check if user submitted empty text
     if not article.strip():
         return render_template('index.html',
-                         error="Please paste a news article before clicking Check News.")
+                             error="Please paste a news article before clicking Check News.")
 
     word_count = len(article.strip().split())
-    if word_count < 20:
+
+    # Less than 5 words — block it
+    if word_count < 5:
         return render_template('index.html',
-                         error=f"Article too short! Please enter at least 20 words. You entered {word_count} words.")
-    
-    result = predict(article)
-    return render_template('index.html', 
-                         prediction=result['prediction'],
-                         confidence=result['confidence'])
+                             error=f"Too short to analyze! Please enter at least 5 words. You entered {word_count} words.")
+
+    # 5 to 20 words — allow but warn
+    warning = None
+    if word_count < 20:
+        warning = f"Short input ({word_count} words) — results may be less accurate. For best results use a full article."
+
+    try:
+        result = predict(article)
+        return render_template('index.html', 
+                             prediction=result['prediction'],
+                             confidence=result['confidence'],
+                             warning=warning)
+    except Exception as e:
+        return render_template('index.html',
+                             error="Something went wrong while analyzing the article. Please try again.")
 
 if __name__ == '__main__':
     app.run(debug=True)

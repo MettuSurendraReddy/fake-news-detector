@@ -84,3 +84,11 @@ button:hover {
     margin-bottom: 15px;
     text-align: center;
 }
+.warning {
+    background-color: #f39c12;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    text-align: center;
+}
