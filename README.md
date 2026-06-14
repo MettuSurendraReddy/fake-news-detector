@@ -19,3 +19,32 @@ With the rise of misinformation online, this tool helps users quickly check the 
 - Color-coded results (green for real, red for fake)
 - Input validation with helpful error messages
 - Clean, responsive UI
+
+## 🚀 Installation & Setup
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/MettuSurendraReddy/fake-news-detector.git
+cd fake-news-detector
+```
+
+2. **Create a virtual environment**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+3. **Install dependencies**
+```bash
+pip install flask pandas scikit-learn transformers torch
+```
+
+4. **Run the application**
+```bash
+python app.py
+```
+
+5. **Open in browser**
+```
+http://127.0.0.1:5000
+```
