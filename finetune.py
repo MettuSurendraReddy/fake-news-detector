@@ -32,3 +32,31 @@ print(train_df['label'].value_counts())
 
 print("\n--- Sample Statements ---")
 print(train_df[['label', 'statement']].head(5))
+
+# Preprocess — simplify 6 labels into 2
+print("\n--- Preprocessing Labels ---")
+
+def simplify_label(label):
+    if label in ['true', 'mostly-true']:
+        return 'REAL'
+    else:
+        return 'FAKE'
+
+train_df['binary_label'] = train_df['label'].apply(simplify_label)
+test_df['binary_label'] = test_df['label'].apply(simplify_label)
+valid_df['binary_label'] = valid_df['label'].apply(simplify_label)
+
+# Keep only statement and binary label
+train_clean = train_df[['statement', 'binary_label']].dropna()
+test_clean = test_df[['statement', 'binary_label']].dropna()
+valid_clean = valid_df[['statement', 'binary_label']].dropna()
+
+print(f"Training samples after cleaning: {len(train_clean)}")
+print(f"Testing samples after cleaning: {len(test_clean)}")
+print(f"Validation samples after cleaning: {len(valid_clean)}")
+
+print("\n--- Binary Label Distribution (Training) ---")
+print(train_clean['binary_label'].value_counts())
+
+print("\n--- Sample Clean Data ---")
+print(train_clean.head(5))
