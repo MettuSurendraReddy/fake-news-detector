@@ -48,3 +48,29 @@ python app.py
 ```
 http://127.0.0.1:5000
 ```
+
+## 🧠 How It Works
+
+1. User pastes a news article into the web interface
+2. Flask receives the text via a POST request
+3. Input validation checks word count before processing
+4. The text is passed to a **RoBERTa transformer model** fine-tuned for fake news classification
+5. The model analyzes language patterns, context, and writing style
+6. A prediction (**REAL** or **FAKE**) is returned with a confidence score
+7. Results are displayed with color coding — 🟢 Green for Real, 🔴 Red for Fake
+
+## 🤖 Model Details
+
+- **Model:** `hamzab/roberta-fake-news-classification`
+- **Source:** HuggingFace Model Hub
+- **Architecture:** RoBERTa (Robustly Optimized BERT Pretraining Approach)
+- **Task:** Text Classification (Fake vs Real News)
+- **Max Input Length:** 512 tokens (longer articles are truncated)
+
+## 📊 Input Validation
+
+| Word Count | Behavior |
+|------------|----------|
+| Less than 5 words | Blocked — too short to analyze |
+| 5 to 20 words | Allowed with accuracy warning |
+| More than 20 words | Full prediction with high confidence |
