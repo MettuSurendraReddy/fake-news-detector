@@ -74,3 +74,23 @@ http://127.0.0.1:5000
 | Less than 5 words | Blocked — too short to analyze |
 | 5 to 20 words | Allowed with accuracy warning |
 | More than 20 words | Full prediction with high confidence |
+
+## 🔮 Future Improvements
+
+- [ ] Fine-tune RoBERTa on LIAR dataset for better accuracy
+- [ ] Add support for multiple languages
+- [ ] Display model confidence chart using Chart.js
+- [ ] Add article URL input alongside text paste
+- [ ] Deploy on HuggingFace Spaces for public access
+- [ ] Add history of previously checked articles
+
+## 👨‍💻 Author
+
+**Mettu Surendra Reddy**
+- 🎓 MSc Artificial Intelligence — Brandenburg University of Technology (BTU Cottbus)
+- 💼 [LinkedIn](https://github.com/MettuSurendraReddy)
+- 🐙 [GitHub](https://github.com/MettuSurendraReddy)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
