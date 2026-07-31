@@ -115,3 +115,61 @@ valid_dataset = NewsDataset(valid_sample['statement'], valid_sample['binary_labe
 print(f"Dataset created successfully!")
 print(f"Training batches: {len(train_dataset)}")
 print(f"Validation batches: {len(valid_dataset)}")
+
+# Load model
+print("\n--- Loading RoBERTa Model ---")
+model = RobertaForSequenceClassification.from_pretrained(
+    'roberta-base',
+    num_labels=2,
+    id2label=id2label,
+    label2id=label2id
+)
+
+# Training setup
+from torch.optim import AdamW
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Training on: {device}")
+
+model = model.to(device)
+
+optimizer = AdamW(model.parameters(), lr=2e-5)
+
+train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
+valid_loader = DataLoader(valid_dataset, batch_size=16)
+
+# Training loop
+print("\n--- Starting Training ---")
+epochs = 2
+
+for epoch in range(epochs):
+    model.train()
+    total_loss = 0
+
+    for batch_idx, batch in enumerate(train_loader):
+        input_ids = batch['input_ids'].to(device)
+        attention_mask = batch['attention_mask'].to(device)
+        labels = batch['label'].to(device)
+
+        optimizer.zero_grad()
+        outputs = model(input_ids=input_ids, 
+                       attention_mask=attention_mask, 
+                       labels=labels)
+        
+        loss = outputs.loss
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+
+        if batch_idx % 10 == 0:
+            print(f"Epoch {epoch+1} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f}")
+
+    avg_loss = total_loss / len(train_loader)
+    print(f"\nEpoch {epoch+1} complete! Average Loss: {avg_loss:.4f}\n")
+
+print("Training complete!")
+
+# Save the fine-tuned model
+model.save_pretrained('fine_tuned_model')
+tokenizer.save_pretrained('fine_tuned_model')
+print("Model saved to fine_tuned_model/")
