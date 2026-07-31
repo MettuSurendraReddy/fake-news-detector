@@ -60,3 +60,58 @@ print(train_clean['binary_label'].value_counts())
 
 print("\n--- Sample Clean Data ---")
 print(train_clean.head(5))
+
+# Fine-tune RoBERTa on LIAR dataset
+print("\n--- Fine-tuning RoBERTa ---")
+
+from transformers import RobertaTokenizer, RobertaForSequenceClassification
+from torch.utils.data import Dataset, DataLoader
+import torch
+
+# Use small subset for training (standard practice for quick experiments)
+train_sample = train_clean.sample(1000, random_state=42)
+valid_sample = valid_clean.sample(200, random_state=42)
+
+print(f"Training on {len(train_sample)} samples")
+print(f"Validating on {len(valid_sample)} samples")
+
+# Label mapping
+label2id = {'FAKE': 0, 'REAL': 1}
+id2label = {0: 'FAKE', 1: 'REAL'}
+
+# Load tokenizer
+print("Loading RoBERTa tokenizer...")
+tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+
+# Create PyTorch dataset
+class NewsDataset(Dataset):
+    def __init__(self, texts, labels, tokenizer, max_length=128):
+        self.texts = texts.tolist()
+        self.labels = [label2id[l] for l in labels.tolist()]
+        self.tokenizer = tokenizer
+        self.max_length = max_length
+
+    def __len__(self):
+        return len(self.texts)
+
+    def __getitem__(self, idx):
+        encoding = self.tokenizer(
+            self.texts[idx],
+            truncation=True,
+            max_length=self.max_length,
+            padding='max_length',
+            return_tensors='pt'
+        )
+        return {
+            'input_ids': encoding['input_ids'].squeeze(),
+            'attention_mask': encoding['attention_mask'].squeeze(),
+            'label': torch.tensor(self.labels[idx])
+        }
+
+# Create datasets
+train_dataset = NewsDataset(train_sample['statement'], train_sample['binary_label'], tokenizer)
+valid_dataset = NewsDataset(valid_sample['statement'], valid_sample['binary_label'], tokenizer)
+
+print(f"Dataset created successfully!")
+print(f"Training batches: {len(train_dataset)}")
+print(f"Validation batches: {len(valid_dataset)}")
