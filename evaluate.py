@@ -58,3 +58,17 @@ print(f"Predictions complete! Total: {len(predictions)}")
 print(f"\nSample predictions:")
 for i in range(5):
     print(f"True: {true_labels[i]} | Predicted: {predictions[i]}")
+
+# Calculate accuracy and F1 score
+from sklearn.metrics import accuracy_score, f1_score, classification_report
+
+print("\n--- Model Evaluation Results ---")
+
+accuracy = accuracy_score(true_labels, predictions)
+f1 = f1_score(true_labels, predictions, pos_label='FAKE')
+
+print(f"Accuracy: {accuracy * 100:.2f}%")
+print(f"F1 Score (FAKE): {f1:.4f}")
+
+print("\n--- Full Classification Report ---")
+print(classification_report(true_labels, predictions))
