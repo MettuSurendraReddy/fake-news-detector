@@ -75,6 +75,25 @@ http://127.0.0.1:5000
 | 5 to 20 words | Allowed with accuracy warning |
 | More than 20 words | Full prediction with high confidence |
 
+## 📈 Model Evaluation Results
+
+The fine-tuned RoBERTa model was evaluated on 200 samples from the LIAR test set.
+
+| Metric | Score |
+|--------|-------|
+| Accuracy | 66.50% |
+| F1 Score (FAKE) | 0.79 |
+| Precision (FAKE) | 0.66 |
+| Recall (FAKE) | 0.98 |
+
+### Confusion Matrix
+![Confusion Matrix](static/confusion_matrix.png)
+
+### Key Observations
+- Model is strong at detecting FAKE news (recall 0.98 — catches 98% of fake articles)
+- Class imbalance in LIAR dataset (64% FAKE vs 36% REAL) affects REAL news recall
+- Trained on
+
 ## 🔮 Future Improvements
 
 - [ ] Fine-tune RoBERTa on LIAR dataset for better accuracy
