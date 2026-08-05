@@ -72,3 +72,29 @@ print(f"F1 Score (FAKE): {f1:.4f}")
 
 print("\n--- Full Classification Report ---")
 print(classification_report(true_labels, predictions))
+
+# Generate confusion matrix
+from sklearn.metrics import confusion_matrix
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+print("\n--- Generating Confusion Matrix ---")
+
+cm = confusion_matrix(true_labels, predictions, labels=['FAKE', 'REAL'])
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, 
+            annot=True, 
+            fmt='d',
+            cmap='Blues',
+            xticklabels=['FAKE', 'REAL'],
+            yticklabels=['FAKE', 'REAL'])
+
+plt.title('Confusion Matrix — Fine-tuned RoBERTa on LIAR Dataset')
+plt.ylabel('Actual Label')
+plt.xlabel('Predicted Label')
+plt.tight_layout()
+plt.savefig('static/confusion_matrix.png')
+print("Confusion matrix saved to static/confusion_matrix.png")
