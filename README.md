@@ -95,8 +95,8 @@ The fine-tuned RoBERTa model was evaluated on 200 samples from the LIAR test set
 
 ### Confusion Matrix
 ![Confusion Matrix](static/confusion_matrix.png)
-## 📸 App Interface
-![Fake News Detector Interface](static/Screenshot%20-%20final%20interface.png)
+### 📸 App Interface
+![Fake News Detector Interface](static/screenshot.png)
 
 ### Key Observations
 - Model is strong at detecting FAKE news (recall 0.98 — catches 98% of fake articles)
