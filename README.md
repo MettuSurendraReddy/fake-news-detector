@@ -1,5 +1,12 @@
 # 🔍 Fake News Detector
 
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python)
+![Flask](https://img.shields.io/badge/Flask-3.1-green?style=flat-square&logo=flask)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow?style=flat-square)
+![RoBERTa](https://img.shields.io/badge/Model-RoBERTa-red?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
+
+
 A web application that uses a fine-tuned RoBERTa transformer model to detect whether a news article is **real** or **fake**, along with a confidence score.
 
 ## 🎯 Project Overview
