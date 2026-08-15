@@ -105,11 +105,14 @@ The fine-tuned RoBERTa model was evaluated on 200 samples from the LIAR test set
 
 ## 🔮 Future Improvements
 
-- [ ] Fine-tune RoBERTa on LIAR dataset for better accuracy
+- [x] Fine-tune RoBERTa on LIAR dataset for better accuracy
+- [x] Build Gradio interface for easy demo
+- [x] Add input validation and error handling
+- [x] Add confusion matrix visualization
+- [ ] Deploy on cloud platform
 - [ ] Add support for multiple languages
 - [ ] Display model confidence chart using Chart.js
 - [ ] Add article URL input alongside text paste
-- [ ] Deploy on HuggingFace Spaces for public access
 - [ ] Add history of previously checked articles
 
 ## 👨‍💻 Author
