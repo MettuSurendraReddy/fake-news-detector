@@ -1,7 +1,5 @@
 from transformers import pipeline
 
-# Load the fake news detection model
-# Using RoBERTa model fine-tuned specifically for fake news detection
 print("Loading model... please wait")
 
 classifier = pipeline(
@@ -17,10 +15,8 @@ def predict(text):
     Output: dictionary with prediction (FAKE/REAL) and confidence score
     """
     result = classifier(text, truncation=True, max_length=512)[0]
-    
     label = result['label']
     confidence = round(result['score'] * 100, 2)
-    
     return {
         "prediction": label,
         "confidence": confidence
